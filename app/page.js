@@ -9,15 +9,19 @@ const page = () => {
     e.preventDefault()
     // alert(`Form Submitted! Title : ${title}, Description : ${desc}`)
 
-    setmainTask([...mainTask, { title, desc }])
+    if (title.length > 0 && desc.length > 0) {
+      setmainTask([...mainTask, { title, desc }])
 
-    console.log(mainTask)
+      console.log(mainTask)
 
-    settitle("")
-    setdesc("")
+      settitle("")
+      setdesc("")
+    }else{
+      alert("Task is empty!")
+    }
   }
 
-  const deleteHandler = (i) =>{
+  const deleteHandler = (i) => {
     let copyTask = [...mainTask]
     copyTask.splice(i, 1)
     setmainTask(copyTask)
@@ -32,11 +36,11 @@ const page = () => {
           <div className='flex items-center justify-between mb-5'>
             <h2 className='text-2xl font-semibold'>{t.title}</h2>
             <p className='text-xl font-semibold'>{t.desc}</p>
-            <button 
-            className='bg-red-400 text-white px-4 py-2 rounded font-bold'
-            onClick={()=>{
-              deleteHandler(i)
-            }}
+            <button
+              className='bg-red-400 text-white px-4 py-2 rounded font-bold'
+              onClick={() => {
+                deleteHandler(i)
+              }}
             >Delete</button>
           </div>
         </li>
